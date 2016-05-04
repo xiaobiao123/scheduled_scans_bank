@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="goujia.bank.dao.OrderDao">
+	<!-- - =============================================== - 返回Order POJO - 
+		@author caoqi - @date 2014-06-13 - =============================================== -->
+	<resultMap type="goujia.bank.model.Order" id="RM_Order">
+		<id property="id" column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+		<result property="code" column="CODE" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="shopId" column="SHOP_ID" jdbcType="INTEGER"
+			javaType="java.lang.Integer" />
+		<result property="shopName" column="SHOP_NAME" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="operatorId" column="OPERATOR_ID" jdbcType="INTEGER"
+			javaType="java.lang.Integer" />
+		<result property="operatorName" column="OPERATOR_NAME"
+			jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="sellerAccountNum" column="SELLER_ACCOUNT_NUM"
+			jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="sellerAccountName" column="SELLER_ACCOUNT_NAME"
+			jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="goodsId" column="GOODS_ID" jdbcType="INTEGER"
+			javaType="java.lang.Integer" />
+		<result property="goodsName" column="GOODS_NAME" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="buyerId" column="BUYER_ID" jdbcType="INTEGER"
+			javaType="java.lang.Integer" />
+		<result property="buyerName" column="BUYER_NAME" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="totalAmount" column="TOTAL_AMOUNT" jdbcType="DECIMAL"
+			javaType="java.math.BigDecimal" />
+		<result property="totalPaymentNum" column="TOTAL_PAYMENT_NUM"
+			jdbcType="INTEGER" javaType="java.lang.Integer" />
+		<result property="payedAmount" column="PAYED_AMOUNT" jdbcType="DECIMAL"
+			javaType="java.math.BigDecimal" />
+		<result property="payedNum" column="PAYED_NUM" jdbcType="INTEGER"
+			javaType="java.lang.Integer" />
+		<result property="paymentInterest" column="PAYMENT_INTEREST"
+			jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+		<result property="bargainPath" column="BARGAIN_PATH" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="memo" column="MEMO" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="status" column="STATUS" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="isDeleted" column="IS_DELETED" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="gmtStart" column="GMT_START" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+		<result property="gmtCreate" column="GMT_CREATE" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+		<result property="gmtModified" column="GMT_MODIFIED" jdbcType="TIMESTAMP"
+			javaType="java.util.Date" />
+		<result property="ownerId" column="OWNER_ID" jdbcType="INTEGER"
+			javaType="java.lang.Integer" />
+		<result property="takeContact" column="TAKE_CONTACT" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="takeContactMobile" column="TAKE_CONTACT_MOBILE"
+			jdbcType="VARCHAR" javaType="java.lang.String" />
+		<result property="takeAddress" column="TAKE_ADDRESS" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<!-- 业主手机号 -->
+		<result property="mobile" column="CUSTOMER_MOBILE" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+		<result property="IDCard" column="CUSTOMER_ID_CARD" jdbcType="VARCHAR"
+			javaType="java.lang.String" />
+
+
+	</resultMap>
+
+	<update id="updateStatus" parameterType="goujia.bank.model.Order">
+	<![CDATA[
+		update G_ORDER 
+		set 
+		GMT_MODIFIED=now()
+		, STATUS=#{status}
+		where 
+		ID=#{id} and STATUS <> 'completed' and STATUS <> 'aborted' and IS_DELETED='n'
+	 ]]>
+	</update>
+	<select id="listOrder" resultMap="RM_Order" parameterType="java.lang.String">
+		SELECT
+		b.code,
+		a.Id,
+		b.gmt_create,
+		a.status
+		FROM
+		G_ORDER A,
+		(
+		SELECT * FROM
+		G_PAYMENT_RECORD a WHERE a.code IN( SELECT MAX(CODE) FROM
+		G_PAYMENT_RECORD GROUP BY order_id) AND a.`STATUS`=1 AND
+		a.`IS_DELETED`='n'
+		) B
+		WHERE A.ID = B.ORDER_ID
+		AND A.IS_DELETED = 'n'
+		  AND a.status IN ('prepaying','accepted_AZZC')
+	</select>
+</mapper>
