@@ -18,11 +18,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @date 2016年3月30日 下午1:53:45
  * 
  */
-public class TestTestReentrantReadWriteLockRead {
+public class Test6TestReentrantReadWriteLockRead {
     private ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 
     public static void main(String[] args) {
-        final TestTestReentrantReadWriteLockRead test = new TestTestReentrantReadWriteLockRead();
+        final Test6TestReentrantReadWriteLockRead test = new Test6TestReentrantReadWriteLockRead();
 
         new Thread() {
             public void run() {

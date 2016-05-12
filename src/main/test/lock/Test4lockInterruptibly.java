@@ -13,11 +13,11 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2016年3月30日 下午1:49:07
  * 
  */
-public class TestlockInterruptibly {
+public class Test4lockInterruptibly {
     private Lock lock = new ReentrantLock();
 
     public static void main(String[] args) {
-        TestlockInterruptibly test = new TestlockInterruptibly();
+        Test4lockInterruptibly test = new Test4lockInterruptibly();
         MyThread thread1 = new MyThread(test);
         MyThread thread2 = new MyThread(test);
         thread1.start();
@@ -50,9 +50,9 @@ public class TestlockInterruptibly {
 }
 
 class MyThread extends Thread {
-    private TestlockInterruptibly test = null;
+    private Test4lockInterruptibly test = null;
 
-    public MyThread(TestlockInterruptibly test) {
+    public MyThread(Test4lockInterruptibly test) {
         this.test = test;
     }
 

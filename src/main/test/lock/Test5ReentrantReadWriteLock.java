@@ -2,11 +2,11 @@ package lock;
 
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-public class TestReentrantReadWriteLock {
+public class Test5ReentrantReadWriteLock {
     private ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 
     public static void main(String[] args) {
-        final TestReentrantReadWriteLock test = new TestReentrantReadWriteLock();
+        final Test5ReentrantReadWriteLock test = new Test5ReentrantReadWriteLock();
 
         new Thread() {
             public void run() {

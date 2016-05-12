@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class TestError {
+public class Test1Error {
     private ArrayList<Integer> arrayList = new ArrayList<Integer>();
 
     public static void main(String[] args) {
-        final TestError test = new TestError();
+        final Test1Error test = new Test1Error();
 
         new Thread() {
             public void run() {

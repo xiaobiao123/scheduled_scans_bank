@@ -12,12 +12,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * @date 2016年3月30日 下午1:47:57
  * 
  */
-public class TestLock {
+public class Test2Lock {
     private ArrayList<Integer> arrayList = new ArrayList<Integer>();
     private Lock lock = new ReentrantLock(); // 注意这个地方
 
     public static void main(String[] args) {
-        final TestLock test = new TestLock();
+        final Test2Lock test = new Test2Lock();
 
         new Thread() {
             public void run() {
