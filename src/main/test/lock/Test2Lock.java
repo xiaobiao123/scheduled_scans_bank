@@ -36,8 +36,8 @@ public class Test2Lock {
         lock.lock();
         try {
             System.out.println(thread.getName() + "得到了锁");
-            for (int i = 0; i < 5; i++) {
-                arrayList.add(i);
+            for (;;) {
+                arrayList.add(0);
             }
         } catch (Exception e) {
             // TODO: handle exception

@@ -1,30 +1,18 @@
 package process.synchContainer;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Test {
-    static Vector<Integer> vector = new Vector<Integer>();
-    public static void main(String[] args) throws InterruptedException {
-        while(true) {
-            for(int i=0;i<10;i++)
-                vector.add(i);
-            Thread thread1 = new Thread(){
-                public void run() {
-                    for(int i=0;i<vector.size();i++)
-                        vector.remove(i);
-                };
-            };
-            Thread thread2 = new Thread(){
-                public void run() {
-                    for(int i=0;i<vector.size();i++)
-                        vector.get(i);
-                };
-            };
-            thread1.start();
-            thread2.start();
-            while(Thread.activeCount()>10)   {
-                 
-            }
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(2);
+
+        Iterator<Integer> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Integer integer = iterator.next();
+            if (integer == 2)
+                list.remove(integer);
         }
     }
 }

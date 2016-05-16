@@ -24,7 +24,7 @@ public class Test1Error {
     }
 
     public void insert(Thread thread) {
-        Lock lock = new ReentrantLock(); // 注意这个地方
+        Lock lock = new ReentrantLock(); // 注意这个地方// 注意这个地方
         lock.lock();
         try {
             System.out.println(thread.getName() + "得到了锁");
