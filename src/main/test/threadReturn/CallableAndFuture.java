@@ -46,7 +46,7 @@ public class CallableAndFuture {
             completionService.submit(new Callable<Integer>() {
                 @Override
                 public Integer call() throws Exception {
-                    // Thread.sleep(1000);
+                    Thread.sleep(1000);
                     return value;
                 }
             });

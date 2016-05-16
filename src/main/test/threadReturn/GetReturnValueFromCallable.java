@@ -38,7 +38,6 @@ public class GetReturnValueFromCallable {
                 return "I from callable";
             }
         });
-
         while (true) {
             /**
              * 获得future对象之前可以使用isDone()方法检测future是否完成，完成后可以调用get()方法获得future的值，

@@ -1,11 +1,11 @@
 package process.synchContainer;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Test {
+public class Test1 {
     public static void main(String[] args) {
-        ArrayList<Integer> list = new ArrayList<Integer>();
+        CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<Integer>();
         list.add(2);
 
         Iterator<Integer> iterator = list.iterator();
